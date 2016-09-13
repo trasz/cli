@@ -188,7 +188,8 @@ class DirectoriesNamespace(EntitySubscriberBasedLoadMixin, TaskBasedSaveMixin, E
             PROVIDERS = {
                 'winbind': ActiveDirectoryPropertiesNamespace,
                 'freeipa': FreeIPAPropertiesNamespace,
-                'ldap': LDAPPropertiesNamespace
+                'ldap': LDAPPropertiesNamespace,
+                'nis': NISPropertiesNamespace
             }
 
             this.load()
@@ -314,6 +315,17 @@ class LDAPPropertiesNamespace(BaseDirectoryPropertiesNamespace):
             descr='Group suffix',
             name='group_suffix',
             get='group_suffix',
+        )
+
+
+class NISPropertiesNamespace(BaseDirectoryPropertiesNamespace):
+    def __init__(self, name, context, parent):
+        super(NISPropertiesNamespace, self).__init__(name, context, parent)
+
+        self.add_property(
+            descr='NIS domain name',
+            name='nis_domain',
+            get='nis_domain'
         )
 
 
